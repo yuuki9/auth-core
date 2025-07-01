@@ -1,4 +1,4 @@
-package com.yuuki.auth.auth_core
+package com.core
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
