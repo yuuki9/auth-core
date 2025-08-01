@@ -1,4 +1,4 @@
-package com.core.auth.adapter.security.config
+package com.core.auth.adapter.port.input.web.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
