@@ -1,5 +1,6 @@
 package com.core.auth.adapter.port.input.web.config
 
+import com.core.auth.adapter.port.output.jwt.filter.JwtAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -13,6 +14,18 @@ class SecurityConfig {
     fun passwordEncoder() = BCryptPasswordEncoder()
 
     @Bean
-    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain =
-        http.build()
+    fun securityFilterChain(
+        http: HttpSecurity,
+        jwtAuthenticateFilter: JwtAuthenticationFilter
+    ): SecurityFilterChain {
+        return http.csrf { it.disable() }
+            .authorizeHttpRequests {
+                it.requestMatchers("/api/v1/post/**").permitAll()
+                it.requestMatchers("/v3/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**").permitAll()
+                it.anyRequest().authenticated()
+            }
+            .addFilterBefore(jwtAuthenticateFilter, UsernamePasswordAuthenticationFilter::class.java)
+            .build()
+    }
+
 }
