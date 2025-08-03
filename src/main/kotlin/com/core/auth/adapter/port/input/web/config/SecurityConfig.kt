@@ -20,7 +20,7 @@ class SecurityConfig {
     ): SecurityFilterChain {
         return http.csrf { it.disable() }
             .authorizeHttpRequests {
-                it.requestMatchers("/api/v1/post/**").permitAll()
+                it.requestMatchers("/login").permitAll()
                 it.requestMatchers("/v3/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**").permitAll()
                 it.anyRequest().authenticated()
             }
