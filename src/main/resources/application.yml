@@ -1,1 +1,6 @@
-spring.application.name=auth-core
+
+
+jwt:
+  secret: iloveprogramming
+  issuer: yuuki
+  expiration-minutes: 15
