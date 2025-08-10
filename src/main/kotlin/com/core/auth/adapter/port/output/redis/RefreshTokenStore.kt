@@ -11,7 +11,13 @@ interface RedisRefreshTokenRepository : CrudRepository<RefreshToken, String>
 class RefreshTokenStore(
     private val repository: RedisRefreshTokenRepository
 ) : RefreshTokenStore {
-    override fun save(email: String) {
-        TODO("Not yet implemented")
+    override fun save(email: String, token: String) {
+        //실제 레디스에 저장 구현
+        val refreshToken = RefreshToken(
+            id = email,
+            token = token,
+            timeToLive = 15,
+        )
+        repository.save(refreshToken)
     }
 }
