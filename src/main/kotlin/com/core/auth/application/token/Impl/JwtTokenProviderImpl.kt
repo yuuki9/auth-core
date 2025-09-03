@@ -14,11 +14,11 @@ class JwtTokenProviderImpl(
 ): JwtTokenProvider {
     override fun generate(email: String) : String {
         //리프레쉬 토큰이 다르면 다시 생성
-        //엑세스 토큰 비교후 만료나 인증실패시 다시 생성
+
         //
         val accessToken = accessTokenGenerator.generate(email)
         val refreshToken = refreshTokenGenerator.generate(email)
-        refreshTokenStore.save(refreshToken)
+        //refreshTokenStore.save(refreshToken)
         return accessToken
     }
 
